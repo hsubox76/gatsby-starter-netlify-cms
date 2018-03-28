@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
-import Background from '../components/Background'
-import { VALUES, SQUARE_SIZE } from '../constants';
+import Background from '../../components/Background'
+import { VALUES, SQUARE_SIZE } from '../../constants';
 
 const Card = styled.div.attrs({ className: 'card' })`
   margin: 10px 0;
