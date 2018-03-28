@@ -3,9 +3,30 @@
 // Config vars
 $kaldi-red: #FD461E
 $kaldi-red-invert: #fff
+$dk-blue: #78b7bf;
+$light-blue: #CAEBF2;
+$body-size: 18px;
+$sky: #CAEBF2;
+$carbon: #A9A9A9;
+$watermelon: #FF3B3F;
+$neutral: #EFEFEF;
 
-$primary: $kaldi-red
-$primary-invert: $kaldi-red-invert
+$translucent-sky: rgba(202, 235, 242, 0.8);
+$translucent-white: rgba(255, 255, 255, 0.8);
+
+$primary: #666;
+$primary-invert: #fff;
+$danger: $watermelon;
+$info: $sky;
+$background: $neutral;
+$body-background-color: $neutral;
+
+$link: $watermelon;
+$navbar-background-color: $translucent-white;
+$navbar-item-color: $watermelon;
+$navbar-item-hover-background-color: $sky;
+
+$card-background-color: $translucent-sky;
 
 // Helper Classes
 .full-width-image-container
@@ -25,3 +46,16 @@ $primary-invert: $kaldi-red-invert
   margin-top: 0 !important
 
 @import "~bulma"
+
+.card-header
+  background-color: $translucent-white;
+
+.card-header-title
+  justify-content: space-between;
+  align-items: center;
+
+.card-header-title .title 
+  margin-bottom: 0;
+
+.card-header .card-header-title .subtitle 
+  margin-top: 0;
