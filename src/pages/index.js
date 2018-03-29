@@ -111,7 +111,10 @@ export default class IndexPage extends React.Component {
 
 export const blogPostsQuery = graphql`
   query BlogPostsQuery {
-    allMarkdownRemark(limit: 4 sort: { order: DESC, fields: [frontmatter___date] }) {
+    allMarkdownRemark(
+      limit: 5
+      sort: { order: DESC, fields: [frontmatter___date] }
+    ) {
       edges {
         node {
           excerpt(pruneLength: 400)
