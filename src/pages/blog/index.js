@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
 import Background from '../../components/Background'
@@ -10,28 +9,13 @@ const Card = styled.div.attrs({ className: 'card' })`
 `;
 
 export default class BlogPage extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      cols: [0],
-      rows: [0]
-    };
-  }
-  componentDidMount() {
-    const el = ReactDOM.findDOMNode(this);
-    const bound = el.getBoundingClientRect();
-    this.setState({
-      cols: Array(Math.ceil(bound.width / SQUARE_SIZE)).fill(0),
-      rows: Array(Math.ceil(bound.height / SQUARE_SIZE)).fill(0)
-    });
-  }
   render() {
     const { data } = this.props
     const { edges: posts } = data.allMarkdownRemark
 
     return (
       <section className="section" style={{ position: 'relative' }}>
-        <Background rows={this.state.rows} cols={this.state.cols} />
+        <Background />
         <div className="container">
           {posts
             .filter(post => post.node.frontmatter.templateKey === 'blog-post')
@@ -69,8 +53,8 @@ export default class BlogPage extends React.Component {
   }
 }
 
-export const pageQuery = graphql`
-  query IndexQuery {
+export const blogQuery = graphql`
+  query BlogQuery {
     allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {

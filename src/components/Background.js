@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import { VALUES, SQUARE_SIZE } from '../constants';
 
@@ -34,29 +35,49 @@ const randomNudgeAlpha = randomNudgeFactory('ALPHA');
 const randomNudgeAngle = randomNudgeFactory('ANGLE');
 const randomNudgeScale = randomNudgeFactory('SCALE');
 
-export default ({ rows, cols }) => {
-  let alpha = VALUES.ALPHA.MID;
-  let angle = VALUES.ANGLE.MID;
-  let scale = VALUES.SCALE.MID;
-  
-  return (
-    <BG>
-      {rows.map((item, rowNum) => {
-        return (
-          <BGRow key={rowNum} style={{ height: SQUARE_SIZE }} >
-            {cols.map(num => {
-              alpha = randomNudgeAlpha(alpha);
-              angle = randomNudgeAngle(angle);
-              scale = randomNudgeScale(scale);
-              const backgroundColor = `rgba(155, 155, 155, ${alpha})`;
-              const transform = `scale(${scale}, ${scale}) rotate(${angle}deg)`
-              return (
-                <div style={{ width: SQUARE_SIZE, backgroundColor, transform }} />
-              );
-            })}
-          </BGRow>
-        );
-      })}
-    </BG>
-  );
-}
+class Background extends React.Component{
+  constructor() {
+    super();
+    this.state = {
+      cols: [0],
+      rows: [0]
+    };
+  }
+  componentDidMount() {
+    const el = ReactDOM.findDOMNode(this);
+    const bound = el.getBoundingClientRect();
+    this.setState({
+      cols: Array(Math.ceil(bound.width / SQUARE_SIZE)).fill(0),
+      rows: Array(Math.ceil(bound.height / SQUARE_SIZE)).fill(0)
+    });
+  }
+  render() {
+    const { rows, cols } = this.state;
+    let alpha = VALUES.ALPHA.MID;
+    let angle = VALUES.ANGLE.MID;
+    let scale = VALUES.SCALE.MID;
+    
+    return (
+      <BG>
+        {rows.map((item, rowNum) => {
+          return (
+            <BGRow key={rowNum} style={{ height: SQUARE_SIZE }} >
+              {cols.map((item, colNum) => {
+                alpha = randomNudgeAlpha(alpha);
+                angle = randomNudgeAngle(angle);
+                scale = randomNudgeScale(scale);
+                const backgroundColor = `rgba(155, 155, 155, ${alpha})`;
+                const transform = `scale(${scale}, ${scale}) rotate(${angle}deg)`
+                return (
+                  <div key={rowNum + '_' + colNum} style={{ width: SQUARE_SIZE, backgroundColor, transform }} />
+                );
+              })}
+            </BGRow>
+          );
+        })}
+      </BG>
+    );
+  }
+};
+
+export default Background;

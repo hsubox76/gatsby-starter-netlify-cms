@@ -7,17 +7,19 @@ $dk-blue: #78b7bf;
 $light-blue: #CAEBF2;
 $body-size: 18px;
 $sky: #CAEBF2;
+$sky-dark: rgb(97, 175, 185);
 $carbon: #A9A9A9;
 $watermelon: #FF3B3F;
 $neutral: #EFEFEF;
 
 $translucent-sky: rgba(202, 235, 242, 0.8);
+$translucent-sky-dark: rgba(97, 175, 185, 0.7);
 $translucent-white: rgba(255, 255, 255, 0.8);
 
 $primary: #666;
 $primary-invert: #fff;
 $danger: $watermelon;
-$info: $sky;
+$info: $translucent-sky-dark;
 $background: $neutral;
 $body-background-color: $neutral;
 
@@ -27,6 +29,7 @@ $navbar-item-color: $watermelon;
 $navbar-item-hover-background-color: $sky;
 
 $card-background-color: $translucent-sky;
+$box-background-color: $translucent-sky-dark;
 
 // Helper Classes
 .full-width-image-container
@@ -59,3 +62,18 @@ $card-background-color: $translucent-sky;
 
 .card-header .card-header-title .subtitle 
   margin-top: 0;
+
+.relative
+  position: relative;
+
+.white-transparent
+  background-color: rgba(255, 255, 255, 0.7)
+
+.box .title
+  color: $white
+
+.box .subtitle
+  color: $white
+
+.navbar
+  border-bottom: 2px solid $watermelon
