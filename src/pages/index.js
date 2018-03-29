@@ -67,7 +67,7 @@ export default class IndexPage extends React.Component {
             </div>
           </div>
           <div className="column is-three-fifths">
-            <div className="box relative">
+            <div className="content relative">
               <h1 className="title">
                 Recent Posts
               </h1>
