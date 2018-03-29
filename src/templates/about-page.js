@@ -1,16 +1,18 @@
 import React from 'react'
 import Content, { HTMLContent } from '../components/Content'
+import Background from '../components/Background'
 
 export const AboutPageTemplate = ({ title, content, contentComponent }) => {
   const PageContent = contentComponent || Content
 
   return (
-    <section className="section section--gradient">
+    <section className="section" style={{ position: 'relative' }}>
+      <Background />
       <div className="container">
         <div className="columns">
           <div className="column is-10 is-offset-1">
-            <div className="section">
-              <h2 className="title is-size-3 has-text-weight-bold is-bold-light">
+            <div className="box relative white-transparent">
+              <h2 className="title is-size-3 has-text-weight-bold has-text-primary is-bold-light">
                 {title}
               </h2>
               <PageContent className="content" content={content} />

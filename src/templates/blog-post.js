@@ -1,27 +1,29 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import Content, { HTMLContent } from '../components/Content'
+import Background from '../components/Background'
 
 export const BlogPostTemplate = ({
   content,
   contentComponent,
-  description,
   title,
   helmet,
 }) => {
   const PostContent = contentComponent || Content
 
   return (
-    <section className="section">
+    <section className="section" style={{ position: 'relative' }}>
+      <Background />
       {helmet || ''}
       <div className="container content">
         <div className="columns">
           <div className="column is-10 is-offset-1">
-            <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
-              {title}
-            </h1>
-            <p>{description}</p>
-            <PostContent content={content} />
+            <div className="box relative sky-transparent">
+                <h1 className="title is-size-2 has-text-primary has-text-weight-bold is-bold-light">
+                  {title}
+                </h1>
+                <PostContent content={content} />
+            </div>
           </div>
         </div>
       </div>
@@ -36,7 +38,7 @@ export default props => {
     <BlogPostTemplate
       content={post.html}
       contentComponent={HTMLContent}
-      description={post.frontmatter.description}
+      description={''}
       helmet={<Helmet title={`Blog | ${post.frontmatter.title}`} />}
       title={post.frontmatter.title}
     />
@@ -51,7 +53,6 @@ export const pageQuery = graphql`
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title
-        description
       }
     }
   }

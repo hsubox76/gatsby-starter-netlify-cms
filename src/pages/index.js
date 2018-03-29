@@ -69,7 +69,7 @@ export default class IndexPage extends React.Component {
           <div className="column is-three-fifths">
             <div className="box relative">
               <h1 className="title">
-                Blog Posts
+                Recent Posts
               </h1>
               {posts
                 .filter(post => post.node.frontmatter.templateKey === 'blog-post')
@@ -92,7 +92,7 @@ export default class IndexPage extends React.Component {
                       </p>
                     </div>
                     <div className="content">
-                      {post.excerpt}
+                      {post.frontmatter.excerpt || post.excerpt}
                       <br />
                       <br />
                       <Link className="button is-danger is-small" to={post.fields.slug}>
@@ -125,6 +125,7 @@ export const blogPostsQuery = graphql`
           frontmatter {
             title
             templateKey
+            excerpt
             date(formatString: "MMMM DD, YYYY")
           }
         }

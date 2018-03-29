@@ -4,10 +4,6 @@ import styled from 'styled-components'
 import Background from '../../components/Background'
 import { VALUES, SQUARE_SIZE } from '../../constants';
 
-const Card = styled.div.attrs({ className: 'card' })`
-  margin: 10px 0;
-`;
-
 export default class BlogPage extends React.Component {
   render() {
     const { data } = this.props
@@ -16,36 +12,37 @@ export default class BlogPage extends React.Component {
     return (
       <section className="section" style={{ position: 'relative' }}>
         <Background />
-        <div className="container">
+        <div className="box relative">
+          <div className="title">Blog Posts</div>
           {posts
             .filter(post => post.node.frontmatter.templateKey === 'blog-post')
             .map(({ node: post }) => (
-              <Card
+              <div
+                className="box white-transparent"
                 key={post.id}
               >
-                <header className="card-header">
-                  <div className="card-header-title">
-                    <p className="title is-4">
-                      <Link className="has-text-primary" to={post.fields.slug}>
+                <div className="content">
+                  <p>
+                    <strong>
+                      <Link to={post.fields.slug}>
                         {post.frontmatter.title}
                       </Link>
-                    </p>
-                    <p className="subtitle is-6">
+                    </strong>
+                    <span> &bull; </span>
+                    <small>
                       {post.frontmatter.date}
-                    </p>
-                  </div>
-                </header>
-                <div className="card-content">
-                  <div className="content">
-                    {post.excerpt}
-                    <br />
-                    <br />
-                    <Link className="button is-danger is-small" to={post.fields.slug}>
-                      Keep Reading →
-                    </Link>
-                  </div>
+                    </small>
+                  </p>
                 </div>
-              </Card>
+                <div className="content">
+                  {post.frontmatter.excerpt || post.excerpt}
+                  <br />
+                  <br />
+                  <Link className="button is-danger is-small" to={post.fields.slug}>
+                    Keep Reading →
+                  </Link>
+                </div>
+              </div>
             ))}
         </div>
       </section>
@@ -66,6 +63,7 @@ export const blogQuery = graphql`
           frontmatter {
             title
             templateKey
+            excerpt
             date(formatString: "MMMM DD, YYYY")
           }
         }
