@@ -15,6 +15,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
             }
             frontmatter {
               templateKey
+              index
             }
           }
         }
@@ -28,6 +29,12 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
     result.data.allMarkdownRemark.edges.forEach(edge => {
       const id = edge.node.id
+      const index = edge.node.frontmatter.index || 0
+      console.log('edge.node', JSON.stringify(edge.node));
+      console.log('index', index);
+      if (edge.node.frontmatter.templateKey === 'book-email') {
+        return;
+      }
       createPage({
         path: edge.node.fields.slug,
         component: path.resolve(
@@ -36,6 +43,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         // additional data can be passed via context
         context: {
           id,
+          index
         },
       })
     })
