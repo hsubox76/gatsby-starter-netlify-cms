@@ -30,8 +30,6 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     result.data.allMarkdownRemark.edges.forEach(edge => {
       const id = edge.node.id
       const index = edge.node.frontmatter.index || 0
-      console.log('edge.node', JSON.stringify(edge.node));
-      console.log('index', index);
       if (edge.node.frontmatter.templateKey === 'book-email') {
         return;
       }

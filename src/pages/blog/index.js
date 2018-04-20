@@ -15,7 +15,7 @@ export default class BlogPage extends React.Component {
         <div className="container">
           <div className="columns">
             <div className="column is-10 is-offset-1">
-            <div className="hero is-info relative">
+            <div className="hero is-primary relative">
               <div className="hero-body">
                 <div className="title">Blog Posts</div>
               </div>

@@ -1,35 +1,7 @@
 @import "~bulma/sass/utilities/initial-variables"
 
 // Config vars
-$kaldi-red: #FD461E
-$kaldi-red-invert: #fff
-$dk-blue: #78b7bf;
-$light-blue: #CAEBF2;
 $body-size: 18px;
-$sky: #CAEBF2;
-$sky-dark: rgb(97, 175, 185);
-$carbon: #A9A9A9;
-$watermelon: #FF3B3F;
-$neutral: #EFEFEF;
-
-$translucent-sky: rgba(202, 235, 242, 0.8);
-$translucent-sky-dark: rgba(97, 175, 185, 0.7);
-$translucent-white: rgba(255, 255, 255, 0.8);
-
-$primary: #666;
-$primary-invert: #fff;
-$danger: $watermelon;
-$info: $translucent-sky-dark;
-$background: $neutral;
-$body-background-color: $neutral;
-
-$link: $watermelon;
-$navbar-background-color: $translucent-white;
-$navbar-item-color: $watermelon;
-$navbar-item-hover-background-color: $sky;
-
-$card-background-color: $translucent-sky;
-$box-background-color: $translucent-sky-dark;
 
 // Helper Classes
 .full-width-image-container
@@ -50,42 +22,16 @@ $box-background-color: $translucent-sky-dark;
 
 @import "~bulma"
 
-.card-header
-  background-color: $translucent-sky-dark;
-
-.card-header-title
-  justify-content: space-between;
-  align-items: center;
-
-.card-header-title .title 
-  margin-bottom: 0;
-
-.card-header .card-header-title .subtitle 
-  margin-top: 0;
-
 .relative
   position: relative;
 
-.white-transparent
-  background-color: rgba(255, 255, 255, 0.7)
-
-.white-transparent-2
-  background-color: rgba(255, 255, 255, 0.85)
-
-.sky-transparent
-  background-color: $translucent-sky;
-
-.red-border
-  border: 1px solid $watermelon;
-
-.box .title
-  color: $white
-
-.box .subtitle
-  color: $white
-
-.navbar
-  border-bottom: 2px solid $watermelon
-
 .hero
   margin-bottom: 20px;
+
+.box.is-primary
+  color: $primary-invert;
+  background-color: $primary;
+
+.box.is-primary .title,
+.box.is-primary .subtitle
+  color: $primary-invert;

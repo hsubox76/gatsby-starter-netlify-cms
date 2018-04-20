@@ -13,7 +13,7 @@ export default class StoryPage extends React.Component {
           <div className="columns">
             <div className="column is-10 is-offset-1">
 
-              <div className="hero is-info relative">
+              <div className="hero is-primary relative">
                 <div className="hero-body">
                   <div className="title">Story</div>
                 </div>

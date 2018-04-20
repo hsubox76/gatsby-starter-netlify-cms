@@ -2,14 +2,12 @@ import React from 'react'
 import Link from 'gatsby-link'
 
 const Navbar = () => (
-  <nav className="navbar">
+  <nav className="navbar is-info">
     <div className="container">
       <div className="navbar-brand">
         <Link to="/" className="navbar-item">
           Christina Hsu Holland
         </Link>
-      </div>
-      <div className="navbar-start">
       </div>
       <div className="navbar-end">
         <Link className="navbar-item" to="/about">
