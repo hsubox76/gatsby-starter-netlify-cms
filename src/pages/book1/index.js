@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
 
-export default class StoryPage extends React.Component {
+export default class BookPage extends React.Component {
   render() {
     const { data } = this.props
     const { edges: posts } = data.allMarkdownRemark
@@ -15,7 +15,7 @@ export default class StoryPage extends React.Component {
 
               <div className="hero is-primary relative">
                 <div className="hero-body">
-                  <div className="title">Story</div>
+                  <div className="title">Book</div>
                 </div>
               </div>
 
