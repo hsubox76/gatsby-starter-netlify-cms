@@ -17,6 +17,18 @@ collections:
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Body", name: "body", widget: "markdown"}
 
+collections:
+  - name: "stories"
+    label: "Stories"
+    folder: "src/pages/stories"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "story-post"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Body", name: "body", widget: "markdown"}
+
   - name: "pages"
     label: "Pages"
     files:
@@ -28,9 +40,9 @@ collections:
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Body", name: "body", widget: "markdown"}
 
-  - name: "story"
-    label: "Story"
-    folder: "src/pages/story"
+  - name: "book"
+    label: "Book"
+    folder: "src/pages/book"
     create: true
     slug: "{{index}}-{{slug}}"
     fields:
