@@ -33,10 +33,14 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       if (edge.node.frontmatter.templateKey === 'book-email' || edge.node.frontmatter.templateKey === 'book-chat') {
         return;
       }
+      let templateFile = edge.node.frontmatter.templateKey;
+      if (templateFile === 'story-post') {
+        templateFile = 'blog-post';
+      }
       createPage({
         path: edge.node.fields.slug,
         component: path.resolve(
-          `src/templates/${String(edge.node.frontmatter.templateKey)}.js`
+          `src/templates/${String(templateFile)}.js`
         ),
         // additional data can be passed via context
         context: {
