@@ -9,4 +9,4 @@ I recently made an unexpectedly popular tweet based on the incredibly deep insig
 
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-Anyway instead of getting the (at most) 5 seconds of laughs it deserved before going to the lazy joke graveyard.
+Anyway instead of getting the (at most) 5 seconds of laughs it deserved before going to the lazy joke graveyard, people really seemed to dig it.
