@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import Layout from "../../components/layout"
+import Layout from "../../components/Layout"
 
 export default class StoriesPage extends React.Component {
   render() {

@@ -1,7 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import Content, { HTMLContent } from '../components/Content'
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 
 export const BlogPostTemplate = ({
   content,
