@@ -42,3 +42,15 @@ and then immediately `npm install @babel/parser`
 or possibly yarn add, who can remember.
 
 Anyway, off to a great start with nary a line of code.
+
+# Step 2: Research (Documentation and Google)
+
+The first thing I wanted to know was of course, how does \`@babel/parser\` work.  I found the [official documentation](https://babeljs.io/docs/en/babel-parser) which was pretty clear, you go `parse.code([your code here])` and then it returns an AST.
+
+This seemed like a good time to figure out what an AST looks like so I googled that too and found a helpful tool called [AST Explorer](https://astexplorer.net/) where you can type in some code on the left and see the AST representation on the right.  I typed in some functions and function calls and it made them all into little nodes and then I was like, okay I get the idea.  I had to come back many times during the process later to see what kind of things get turned into what kind of nodes and what properties they have but whatever, later is later.
+
+I also googled a lot of crap like "search ASTs" or whatever, and browsed around the table of contents of the page where I found the **@babel/parser **documentation to see what else they got.  They had a thing called **@babel/traverse** which I thought was intriguing.
+
+It traverses the tree for you, which would be really handy in a whiteboard interview, or at least provides a compelling argument for why you don't often need to implement your own recursion on the job and why can't they ask about a project you did.  You provide `traverse()` with the AST, and one or more functions called **visitors **that do stuff when they enter a node, exit a node, or enter/exit a specific type of node.
+
+I knew I would need this because one of the things in the tweet, which I was now considering a spec, was callback depth.  At first I was thinking about some clever recursiony way to get at this, but finally I just settled for making a **visitor **that would run on exit on every **CallExpression **node type (this is a node that represents a function call, and it's got children in an **arguments** property that are the arguments in the function call.
