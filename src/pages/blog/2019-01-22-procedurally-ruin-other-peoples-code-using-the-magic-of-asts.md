@@ -9,6 +9,8 @@ I recently made an unexpectedly popular tweet based on the incredibly deep insig
 
 Anyway instead of getting the (at most) 5 seconds of laughs it deserved before going to the lazy joke graveyard, it took off for whatever random reason.  I'm as much of a fan of attention as the next person so I decided to implement the damn thing.
 
+# A Teachable Moment, I Guess
+
 And in the course of doing so, I figured, I could maybe help teach other people some of the basic concepts behind linting or formatting or otherwise screwing with source code files, and hell, maybe those people would actually do something useful with that skill.
 
 Maybe it would help demystify the intimidating aura around making dev tools if I, an idiot, could show how one might stumble one's way through making such a tool, or enough of the scaffolding of one to give someone else the confidence to build a full-featured useful thing.
@@ -38,3 +40,5 @@ enter enter enter enter enter...
 and then immediately `npm install @babel/parser`
 
 or possibly yarn add, who can remember.
+
+Anyway, off to a great start with nary a line of code.
