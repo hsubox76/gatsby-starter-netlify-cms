@@ -1,8 +1,6 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import styled from 'styled-components'
-import Background from '../../components/Background'
-import { VALUES, SQUARE_SIZE } from '../../constants';
+import Layout from "../../components/layout"
 
 export default class StoriesPage extends React.Component {
   render() {
@@ -10,8 +8,8 @@ export default class StoriesPage extends React.Component {
     const { edges: posts } = data.allMarkdownRemark
 
     return (
+      <Layout>
       <section className="section" style={{ position: 'relative' }}>
-        <Background />
         <div className="container">
           <div className="columns">
             <div className="column is-10 is-offset-1">
@@ -54,6 +52,7 @@ export default class StoriesPage extends React.Component {
           </div>
         </div>
       </section>
+      </Layout>
     )
   }
 }

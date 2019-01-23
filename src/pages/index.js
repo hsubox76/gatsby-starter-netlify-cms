@@ -1,6 +1,6 @@
 import React from 'react'
-import Background from '../components/Background'
 import Link from 'gatsby-link'
+import Layout from "../components/layout"
 
 export default class IndexPage extends React.Component {
   render() {
@@ -8,8 +8,8 @@ export default class IndexPage extends React.Component {
     const { edges: posts } = data.allMarkdownRemark
 
     return (
+      <Layout>
       <section className="section" style={{ position: 'relative' }}>
-        <Background />
         <div className="columns">
           <div className="column is-two-fifths">
             <div className="box is-primary relative">
@@ -20,6 +20,27 @@ export default class IndexPage extends React.Component {
                   Recent & Upcoming Talks
                 </h2>
                 <div className="box">
+                  <a href="https://conf.reactjs.org/">
+                    Talk @ ReactConf '18 (10/25/2018)
+                  </a>
+                  <div>"Building Todo The Game In A Cloud-Only Dev Environment"</div>
+                  <div>
+                    <a href="https://youtu.be/kVSTKD13gos"><span className="fas fa-video"></span> Video</a>
+                  </div>
+                </div>
+                <div className="box">
+                  <a href="https://revolutionconf.com/">
+                    Talk @ RevolutionConf '18 (5/17/2018)
+                  </a>
+                  <div>"Building Browser Charts From Scratch: Why?? and How"</div>
+                </div>
+                <div className="box">
+                  <a href="https://www.reactathon.com/">
+                    Talk @ Reactathon (3/22/2018)
+                  </a>
+                  <div>"Charts from Scratch in React"</div>
+                </div>
+                <div className="box">
                   <a href="http://nodevember.org/">
                     Talk @ Nodevember (11/28/2017)
                   </a>
@@ -29,18 +50,6 @@ export default class IndexPage extends React.Component {
                     <span> | </span>
                     <a href="https://www.slideshare.net/secret/eyklOqWNAM9rJU"><span className="fa fa-window-maximize"></span> Slides</a>
                   </div>
-                </div>
-                <div className="box">
-                  <a href="https://www.reactathon.com/">
-                    Talk @ Reactathon (3/22/2018)
-                  </a>
-                  <div>"Charts from Scratch in React"</div>
-                </div>
-                <div className="box">
-                  <a href="https://revolutionconf.com/">
-                    Talk @ RevolutionConf '18 (5/17/2018)
-                  </a>
-                  <div>"Building Browser Charts From Scratch: Why?? and How"</div>
                 </div>
             </div>
             <div className="box is-primary relative">
@@ -107,6 +116,7 @@ export default class IndexPage extends React.Component {
           </div>
         </div>
       </section>
+      </Layout>
     )
   }
 }

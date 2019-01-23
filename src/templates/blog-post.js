@@ -1,7 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import Content, { HTMLContent } from '../components/Content'
-import Background from '../components/Background'
+import Layout from "../components/layout"
 
 export const BlogPostTemplate = ({
   content,
@@ -12,8 +12,8 @@ export const BlogPostTemplate = ({
   const PostContent = contentComponent || Content
 
   return (
+    <Layout>
     <section className="section" style={{ position: 'relative' }}>
-      <Background />
       {helmet || ''}
       <div className="container content">
         <div className="columns">
@@ -28,6 +28,7 @@ export const BlogPostTemplate = ({
         </div>
       </div>
     </section>
+    </Layout>
   )
 }
 
