@@ -19,6 +19,7 @@ module.exports = {
         name: 'images',
       },
     },
+    'gatsby-plugin-twitter',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     {
