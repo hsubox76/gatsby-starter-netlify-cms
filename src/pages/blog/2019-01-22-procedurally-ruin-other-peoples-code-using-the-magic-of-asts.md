@@ -11,9 +11,9 @@ Anyway instead of getting the (at most) 5 seconds of laughs it deserved before g
 
 # A Teachable Moment, I Guess
 
-And in the course of doing so, I figured, I could maybe help teach other people some of the basic concepts behind linting or formatting or otherwise screwing with source code files, and hell, maybe those people would actually do something useful with that skill.
+And in the course of doing so, I figured, I could maybe help teach other people some of the basic concepts behind linting or formatting or otherwise screwing with source code files, and hell, maybe those people would actually **do something useful **with that skill.
 
-Maybe it would help demystify the intimidating aura around making dev tools if I, an idiot, could show how one might stumble one's way through making such a tool, or enough of the scaffolding of one to give someone else the confidence to build a full-featured useful thing.
+Maybe it would help demystify the intimidating aura around making dev tools if I, an **idiot**, could show how one might stumble one's way through making such a tool, or enough of the scaffolding of one to give someone else the confidence to build a full-featured useful thing.
 
 I apologize if this is more rambly than a direct set of how-to steps but as the purpose is to show how someone might go from zero (domain knowledge at least) to... well, an MVP, the journey is pretty key.
 
@@ -21,7 +21,7 @@ I apologize if this is more rambly than a direct set of how-to steps but as the 
 
 Look, if you are a smart computer science person I'm sure you can reason it out from first principles or it'll come to you in a dream.  But for the rest of us idiots, the best thing to do is think of some open source tool that exists that is sort of close to what you want, and then** go look at its Github repo**.
 
-There's no reason to feel bad about stealing other people's ideas, that's the whole point of open source.  Unless they have some weird license.  Otherwise go ape.  If the bit you're stealing is very clever or unique or you're taking a large chunk verbatim, then you should probably let them know and give credit in your README.
+> Note: There's no reason to feel bad about stealing other people's ideas, that's the whole point of open source.  Unless they have some weird license.  Otherwise go ape.  If the bit you're stealing is very clever or unique or you're taking a large chunk verbatim, then you should probably let them know and give credit in your README.
 
 In my case I went to the [prettier](https://github.com/prettier/prettier) repo because, duh, that's what I was ripping off in the first place.  I had heard of a thing called an **Abstract Syntax Tree (AST)** before, which is where all your code gets turned into a tree where each node is like a function or an expression or a param or an if-block or whatever.  Turning code text into an AST sounds like a pretty tall order so I assumed **prettier** probably used some other package to do it.
 
@@ -69,7 +69,7 @@ Now that I'm writing this out I'm pretty sure I did something wrong and it's goi
 
 ## Counting Function Lines
 
-This one wasn't as weird and would be a terrible interview question.  I added an visitor to \`traverse\` that would run on nodes of type **FunctionDeclaration** which contains all the code for declaring and implementing a function.
+This one wasn't as weird and would be a terrible interview question.  I added an visitor to `traverse` that would run on nodes of type **FunctionDeclaration** which contains all the code for declaring and implementing a function.
 
 I clicked around in the ol' AST Explorer and found that all nodes have a field called `loc`, which contains a `start` and `end`, which each contain a `line` and `column`.  So the current node is `path.node` so
 
@@ -80,3 +80,59 @@ const length = path.node.loc.end.line - path.node.loc.start.line;
 et voila, function length.  Then I just write a big old `if-else` block to say different mean things at different ranges.
 
 # Step 4: The Thing You Thought Was Gonna Work Isn't Gonna Work
+
+Since I was just grabbing babel libraries left and right and they were doing all the work for me, I figured I could keep going with it when it came time to output code with snarky comments.  I had inserted the comments as comment nodes attached to whatever line they were about, and it was time to turn the AST back into lines.
+
+The tool that does that is `@babel/generator` where you just go `generate(ast)` and poof! it returns code text.
+
+Unfortunately all the whitespacing is all weird, especially around preexisting comments.  Which totally makes sense because the whole main point of babel is to generate usable working code for production, not formatting.  That's what **prettier** is for.
+
+So what does **prettier** do?  Again, open source is wonderful, I went and looked at it.  Unfortunately they implement the formatting themselves.  Which again makes sense because that is the main point of that library, so you'd want full control over it.  I'm saying it's unfortunate for me because I'm too dumb to understand the details of how they did it and do my own version.
+
+> If you are making a tool to change code functionality though, so the appearance of the resulting code doesn't really matter, @babel/generate is a great way to go. It even minifies and does source maps and stuff.
+
+# Step 5: Just Do Whatever Works
+
+Instead I just put all the locations (`start.line`, `start.column`) of all the offending lines in a `Map` as I found them and then at the end I went through all the lines of the original code and inserted them in.  Is this the best way to do it? Probably not!
+
+But you know what, when I run it on the command line, it makes a new file with all my dumb words in the right place.  So whatevs.
+
+# Step 6: Go Public
+
+I only recommend this if you're publishing a joke library or you're trying to impress someone you have a date with tomorrow and you want to be able to pull the npm page up on your phone and show them.  If you're making like an Important Thing you should like code review and test and optimize and stage and whatever.
+
+Anyway
+
+```
+git push origin master
+```
+
+And then you have to put it on npm so you can further pretend this is a Real Thing so it'll be funnier.  All you really need is a `package.json` with whatever default stuff it fills in when you `npm init`.
+
+> Oh, uh, the "name" field is going to be the official npm package name so make sure it's the one you want and no conflicts or whatever.
+
+But if you want people to be able to call it from the command line or npm scripts (like have it in `node_modules/.bin`) then add a bin option in the ol' `package.json` that points to your main executable:
+
+```
+  "bin": {
+    "petty-af": "./src/index.js"
+  },
+```
+
+and put this at the top of said executable:
+
+```
+#!/usr/bin/env node
+```
+
+and there you go, it's a Real Tool you can get on the npm.
+
+Then you (supposing you've set up an npm account already) `npm publish --access public` and now it belongs to the world.
+
+# Step 7: Flog It
+
+NPM: <https://www.npmjs.com/package/petty-af>
+
+Github: <https://github.com/hsubox76/petty-af>
+
+Sorry I don't have a Soundcloud.
