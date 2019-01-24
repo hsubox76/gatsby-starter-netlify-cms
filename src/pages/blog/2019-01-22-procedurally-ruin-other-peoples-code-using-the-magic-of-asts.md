@@ -25,7 +25,7 @@ There's no reason to feel bad about stealing other people's ideas, that's the wh
 
 In my case I went to the [prettier](https://github.com/prettier/prettier) repo because, duh, that's what I was ripping off in the first place.  I had heard of a thing called an **Abstract Syntax Tree (AST)** before, which is where all your code gets turned into a tree where each node is like a function or an expression or a param or an if-block or whatever.  Turning code text into an AST sounds like a pretty tall order so I assumed **prettier** probably used some other package to do it.
 
-I was wrong, it actually used several packages to do it, because prettier works on quite a few different languages.  But one of these packages was **@babel/parser**, which I figured was the one I wanted for modern JavaScript.
+I was wrong, it actually used several packages to do it, because prettier works on quite a few different languages.  But one of these packages was **`@babel/parser`**, which I figured was the one I wanted for modern JavaScript.
 
 So I started a new repo
 
@@ -49,8 +49,34 @@ The first thing I wanted to know was of course, how does \`@babel/parser\` work.
 
 This seemed like a good time to figure out what an AST looks like so I googled that too and found a helpful tool called [AST Explorer](https://astexplorer.net/) where you can type in some code on the left and see the AST representation on the right.  I typed in some functions and function calls and it made them all into little nodes and then I was like, okay I get the idea.  I had to come back many times during the process later to see what kind of things get turned into what kind of nodes and what properties they have but whatever, later is later.
 
-I also googled a lot of crap like "search ASTs" or whatever, and browsed around the table of contents of the page where I found the **@babel/parser **documentation to see what else they got.  They had a thing called **@babel/traverse** which I thought was intriguing.
+I also googled a lot of crap like "search ASTs" or whatever, and browsed around the table of contents of the page where I found the **`@babel/parser` **documentation to see what else they got.  They had a thing called **`@babel/traverse`** which I thought was intriguing.
 
 It traverses the tree for you, which would be really handy in a whiteboard interview, or at least provides a compelling argument for why you don't often need to implement your own recursion on the job and why can't they ask about a project you did.  You provide `traverse()` with the AST, and one or more functions called **visitors **that do stuff when they enter a node, exit a node, or enter/exit a specific type of node.
 
-I knew I would need this because one of the things in the tweet, which I was now considering a spec, was callback depth.  At first I was thinking about some clever recursiony way to get at this, but finally I just settled for making a **visitor **that would run on exit on every **CallExpression **node type (this is a node that represents a function call, and it's got children in an **arguments** property that are the arguments in the function call.
+I knew I would need this because one of the things in the tweet, which I was now considering a spec, was callback depth, which I had some idea would involve traversing a tree, because I've read _Cracking the Coding Interview_.
+
+# Step 3: Type Some Code
+
+So I imported `@babel/traverse` and typed `traverse(` somewhere in my code and ignored the linting error while I looked up the documentation and found an example to copy.  I found an example that visited all the nodes so sure, let's go with that.
+
+## Counting Callback Depth
+
+At first I was thinking about some clever recursiony way to get at this, but finally I just settled for making a **visitor **that would run on exiting every node and it would bail if the node's type didn't include the string **FunctionExpression** (there's two types that represent a function reference, regular **FunctionExpression** and **ArrowFunctionExpression**).
+
+When it found one of these, it would check the **path**, the only argument provided to traverse visitor functions, containing each node's whole path down the tree and a bunch of other metadata.  It would walk up all its ancestors, counting **CallExpression** nodes it found along the way, until it got to the top of the tree (node type "**Program**").  **CallExpression** nodes are function call expressions, and arguments are its children.
+
+Now that I'm writing this out I'm pretty sure I did something wrong and it's going to catch some steps that aren't callbacks.  Oh well.  I'll figure it out at some point.
+
+## Counting Function Lines
+
+This one wasn't as weird and would be a terrible interview question.  I added an visitor to \`traverse\` that would run on nodes of type **FunctionDeclaration** which contains all the code for declaring and implementing a function.
+
+I clicked around in the ol' AST Explorer and found that all nodes have a field called `loc`, which contains a `start` and `end`, which each contain a `line` and `column`.  So the current node is `path.node` so
+
+```
+const length = path.node.loc.end.line - path.node.loc.start.line;
+```
+
+et voila, function length.  Then I just write a big old `if-else` block to say different mean things at different ranges.
+
+# Step 4: The Thing You Thought Was Gonna Work Isn't Gonna Work
