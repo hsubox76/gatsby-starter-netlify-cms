@@ -106,7 +106,7 @@ export default class IndexPage extends React.Component {
                       {post.frontmatter.excerpt || post.excerpt}
                       <br />
                       <br />
-                      <Link className="button is-danger is-small" to={post.fields.slug}>
+                      <Link className="button is-primary" to={post.fields.slug}>
                         Keep Reading →
                       </Link>
                     </div>

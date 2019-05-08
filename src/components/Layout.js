@@ -3,12 +3,11 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
 import Navbar from './Navbar'
-import Background from '../components/Background'
+// import Background from '../components/Background'
 import '../layouts/all.sass'
 
 const Layout = ({ children }) => (
-  <div>
-    <Background />
+  <div className="layout-container">
     <Helmet title="Christina Holland" />
     <Navbar />
     <div className="container">{children}</div>
